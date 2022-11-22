@@ -57,6 +57,11 @@ abstract class Model implements \JsonSerializable
         return 'id';
     }
 
+    public static function getColumnNameLogin() : string
+    {
+        return 'login';
+    }
+
     /**
      * Connect to DB
      * @return null
@@ -109,6 +114,26 @@ abstract class Model implements \JsonSerializable
             throw new \Exception('Query failed: ' . $e->getMessage(), 0, $e);
         }
     }
+
+
+    static public function getOneLogin($login): ?static
+    {
+        if ($login == null) return null;
+
+        self::connect();
+        try {
+            $sql = "SELECT * FROM `" . static::getTableName() . "` WHERE `" . static::getColumnNameLogin() . "`=?";
+            $stmt = self::$connection->prepare($sql);
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, static::class);
+            $stmt->execute([$login]);
+            return $stmt->fetch() ?: null;
+        } catch (PDOException $e) {
+            throw new \Exception('Query failed: ' . $e->getMessage(), 0, $e);
+        }
+    }
+
+
+
 
     /**
      * Save the current model to DB (if model id is set, update it, else create a new model)
