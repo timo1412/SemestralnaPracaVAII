@@ -1,0 +1,59 @@
+.table{
+    padding: 80px;
+}
+
+.data {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 70px;
+}
+
+
+
+.data tr > * {
+    padding: 2px;
+    border: 1px solid black;
+    height: 100px;
+    text-align: center;
+    width: 60px;
+
+}
+/* data th lebo formatuje zahlavie tabulky a zahlavie tabulky je tvorene elementami th(table head) a bunky td(table data) */
+.data th {
+    background-color: #2ecc71;
+    font-weight: bold;
+    color: white;
+    padding: 5px;
+}
+
+.data th{
+    color: black;
+
+}
+/* nth=child() pomocou tohto selectora vyberam n-teho prvka z td(table data) teda telo tabulky */
+/*  do zatvorky selectoru vyberame kolkeho potomka chceme 2(druheho) 2n(kazdeho fruheho) 3n+5(kazdeho tretieho ale zacnem az na 5tom riadku)*/
+.data tr:nth-child(odd) td {
+    background-color: #ecf0f1;
+}
+/* formatovanie stlpca priezvisko na velke pismena*/
+
+/* pseudo trieda definu pravidla pre elementy nad ktorymi sa nachadza kurzor mysi*/
+.data tr:hover td{
+    background-color: #bdc3c7;
+}
+
+.data tr td:hover{
+    background-color: cornflowerblue;
+}
+
+/* akonahle bude mys mimo prveho stlpca bude prvy stlpec cerveny ked sa dostane mys na prvy stlpec tak bude farba povodna*/
+.data tr:hover td:first-child:not(:hover){
+    color: #e74c3c
+}
+
+
+.data th{
+    position: sticky;
+    top: -1px;
+}

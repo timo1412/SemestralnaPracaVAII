@@ -15,36 +15,35 @@
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/styl.css">
+    <link rel="stylesheet" href="public/css/uvod.css">
     <script src="public/js/script.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="?c=home">
-            <img src="public/images/vaiicko_logo.png" title="<?= \App\Config\Configuration::APP_NAME ?>"
-                 title="<?= \App\Config\Configuration::APP_NAME ?>">
-        </a>
-        <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="?c=home&a=contact">Kontakt</a>
-            </li>
+
+<header>
+    <h1 class = "loho">Survival Jissen</h1>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle ">
+    <nav>
+
+        <ul>
+            <li><a href="?c=home">Domov</a></li>
+            <li><a href="?c=history">Registracia</a></li>
+            <li><a href="?c=trening">Tréningy</a></li>
+            <li><a href="?c=posts">Aktuality</a></li>
+            <?php if ($auth->isLogged()) { ?>
+            <li><a href="?c=auth&a=logout">Odhlasenie</a></li>
+            <li><a href="#" ><?php echo $auth->getLoggedUserName()?> </a></li>
+            <?php } else { ?>
+                <li class="signName" ><a href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásenie</a></li>
+            <?php } ?>
         </ul>
-        <?php if ($auth->isLogged()) { ?>
-            <span class="navbar-text">Prihlásený používateľ: <b><?= $auth->getLoggedUserName() ?></b></span>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="?c=auth&a=logout">Odhlásenie</a>
-                </li>
-            </ul>
-        <?php } else { ?>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásenie</a>
-                </li>
-            </ul>
-        <?php } ?>
-    </div>
-</nav>
+
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+    </label>
+</header>
+
 <div class="container-fluid mt-3">
     <div class="web-content">
         <?= $contentHTML ?>
